@@ -2,11 +2,10 @@
 #include "pathfinding.hpp"
 
 class PathAgent {
-private:
-	int m_currentIndex;
+public:
 	Node* m_currentNode;
 	float m_speed;
-public:
+	int m_currentIndex;
 	std::vector<Node*> m_path;
 	glm::vec2 m_position;
 	void update(float dtime);

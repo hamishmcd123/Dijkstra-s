@@ -13,7 +13,7 @@ Node* NodeMap::getNode(int x, int y)
 void NodeMap::draw()
 {
 	// Draw a solid rectangle where there ISN'T a node.
-	Color cellColour{ 255, 0, 0, 255 };
+	Color cellColour{ 200, 0, 0, 255 };
 
 	for (int y = 0; y < m_height; y++) {
 		for (int x = 0; x < m_width; x++) {
@@ -38,7 +38,7 @@ void NodeMap::drawPath(std::vector<Node*> path)
 {
 	for (int i = 1; i < path.size(); i++) {
 		DrawLine(path[i - 1]->position.x, path[i - 1]->position.y, path[i]->position.x,
-			path[i]->position.y, BLUE);
+			path[i]->position.y, LIME);
 	}
 }
 

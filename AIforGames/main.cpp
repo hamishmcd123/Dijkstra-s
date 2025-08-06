@@ -5,7 +5,7 @@
 #include "pathagent.hpp"
 
 int main() {
-    int cellSize = 64;
+    int cellSize = 32;
 
     std::vector<std::string> asciiMap;
     asciiMap.push_back("000000000000");
@@ -26,7 +26,8 @@ int main() {
 
     PathAgent agent;
     agent.setNode(start);
-    agent.setSpeed(64);
+    agent.m_position = start->position;
+    agent.setSpeed(256);
 
     std::vector<Node*> path = NodeMap::DijkstrasSearch(start, end);
 
@@ -44,6 +45,7 @@ int main() {
             path = NodeMap::DijkstrasSearch(start, end);
             if (start != nullptr) {
 				agent.setNode(start);
+                agent.m_position = start->position;
 				agent.goToNode(end);
             }
 	   }
@@ -51,9 +53,6 @@ int main() {
         else if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)) {
             Vector2 mousePos = GetMousePosition();
             end = map.getClosestNode(glm::vec2(mousePos.x, mousePos.y));
-            start = map.getClosestNode(agent.m_position);
-            path = NodeMap::DijkstrasSearch(start, end);
-            agent.setNode(start);
             agent.goToNode(end);
         }
 

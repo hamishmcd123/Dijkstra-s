@@ -30,6 +30,7 @@ void PathAgent::update(float dtime)
 			nextNode = m_path[m_currentIndex];
 			vecToTarget = nextNode->position - m_position;
 			m_position += -1 * toMove * glm::normalize(vecToTarget);
+			setNode(nextNode);
 		}
 	}
 }
@@ -42,14 +43,13 @@ void PathAgent::goToNode(Node* node)
 
 void PathAgent::draw()
 {
-	DrawCircle((int)m_position.x, (int)m_position.y, 16, { 255,255,0,255 });
+	DrawCircle((int)m_position.x, (int)m_position.y, 8, { 16,122,176,255 });
 
 }
 
 void PathAgent::setNode(Node* node)
 {
 	m_currentNode = node;
-	m_position = node->position;
 }
 
 void PathAgent::setSpeed(int speed)
