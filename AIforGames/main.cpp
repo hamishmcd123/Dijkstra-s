@@ -5,22 +5,35 @@
 #include "pathagent.hpp"
 
 int main() {
-    int cellSize = 64;
+    int cellSize = 32;
 
     std::vector<std::string> asciiMap;
-    asciiMap.push_back("000000000000");
-    asciiMap.push_back("010111011100");
-    asciiMap.push_back("010101110110");
-    asciiMap.push_back("010100010000");
-    asciiMap.push_back("010111111110");
-    asciiMap.push_back("010000010000");
-    asciiMap.push_back("011111111110");
-    asciiMap.push_back("000000000000");
+    asciiMap.push_back("000000000000000000000000000000");
+    asciiMap.push_back("011111111111111111111111111110");
+    asciiMap.push_back("011000000000001111000000000110");
+    asciiMap.push_back("011011111110001001111111110110");
+    asciiMap.push_back("011010000010001001000000010110");
+    asciiMap.push_back("011011110011111001111110010110");
+    asciiMap.push_back("011000010000001001000010010110");
+    asciiMap.push_back("011111011111101111011110010110");
+    asciiMap.push_back("010000010001000001000010010110");
+    asciiMap.push_back("011111110111111111111110010110");
+    asciiMap.push_back("011000000100000000000000010110");
+    asciiMap.push_back("011011111101111111111111110110");
+    asciiMap.push_back("011010000001000000000000000110");
+    asciiMap.push_back("011011111101011111111111110110");
+    asciiMap.push_back("011000000101000000000010000110");
+    asciiMap.push_back("011111111101011111111111110110");
+    asciiMap.push_back("011000000000000000000000000110");
+    asciiMap.push_back("011111111111111111111111111110");
+    asciiMap.push_back("000000000000000000000000000000");
+
+
     
     NodeMap map;
     map.initialise(asciiMap, cellSize);
     
-    Node* start = map.getNode(1,1);
+    Node* start = map.getNode(2,2);
     Node* end = nullptr;
 
 
@@ -28,7 +41,7 @@ int main() {
     agent.setNode(start);
     agent.m_position = start->position;
     agent.setSpeed(1024);
-    agent.setRadius(25);
+    agent.setRadius(8);
 
     std::vector<Node*> path = NodeMap::DijkstrasSearch(start, end);
 
@@ -41,6 +54,7 @@ int main() {
         NodeMap::drawPath(agent.m_path);
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            map.resetNodes();
             Vector2 mousePos = GetMousePosition();
             start = map.getClosestNode(glm::vec2(mousePos.x, mousePos.y));
             path = NodeMap::DijkstrasSearch(start, end);
@@ -52,6 +66,7 @@ int main() {
 	   }
 
         else if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)) {
+            map.resetNodes();
             Vector2 mousePos = GetMousePosition();
             end = map.getClosestNode(glm::vec2(mousePos.x, mousePos.y));
             agent.goToNode(end);

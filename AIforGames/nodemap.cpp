@@ -115,6 +115,19 @@ void NodeMap::initialise(std::vector<std::string>& asciiMap, int cellSize) {
 	}
 }
 
+void NodeMap::resetNodes()
+{
+	for (int y = 0; y < m_height; y++) {
+		for (int x = 0; x < m_width; x++) {
+			Node* toReset = getNode(x, y);
+			if (toReset) {
+				toReset->previous = nullptr;
+				toReset->gScore = INT_MAX;
+			}
+		}
+	}
+}
+
 std::vector<Node*> NodeMap::DijkstrasSearch(Node* startNode, Node* endNode)
 {
 	if (startNode == nullptr || endNode == nullptr) {
