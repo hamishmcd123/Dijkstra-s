@@ -5,7 +5,7 @@
 #include "pathagent.hpp"
 
 int main() {
-    int cellSize = 32;
+    int cellSize = 64;
 
     std::vector<std::string> asciiMap;
     asciiMap.push_back("000000000000");
@@ -27,7 +27,8 @@ int main() {
     PathAgent agent;
     agent.setNode(start);
     agent.m_position = start->position;
-    agent.setSpeed(256);
+    agent.setSpeed(1024);
+    agent.setRadius(25);
 
     std::vector<Node*> path = NodeMap::DijkstrasSearch(start, end);
 

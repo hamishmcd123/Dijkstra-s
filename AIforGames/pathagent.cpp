@@ -43,7 +43,7 @@ void PathAgent::goToNode(Node* node)
 
 void PathAgent::draw()
 {
-	DrawCircle(static_cast<int>(m_position.x), static_cast<int>(m_position.y), 8, { 16,122,176,255 });
+	DrawCircle(static_cast<int>(m_position.x), static_cast<int>(m_position.y), m_radius, { 16,122,176,255 });
 
 }
 
@@ -55,4 +55,9 @@ void PathAgent::setNode(Node* node)
 void PathAgent::setSpeed(int speed)
 {
 	m_speed = speed;
+}
+
+void PathAgent::setRadius(int radius)
+{
+	m_radius = radius;
 }
