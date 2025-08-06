@@ -43,7 +43,7 @@ void PathAgent::goToNode(Node* node)
 
 void PathAgent::draw()
 {
-	DrawCircle((int)m_position.x, (int)m_position.y, 8, { 16,122,176,255 });
+	DrawCircle(static_cast<int>(m_position.x), static_cast<int>(m_position.y), 8, { 16,122,176,255 });
 
 }
 

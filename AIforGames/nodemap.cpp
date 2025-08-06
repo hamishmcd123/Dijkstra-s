@@ -19,15 +19,15 @@ void NodeMap::draw()
 		for (int x = 0; x < m_width; x++) {
 			Node* node = getNode(x, y);
 			if (node == nullptr) {
-				DrawRectangle((int)(x * m_cellSize), (int)(y * m_cellSize),
-					(int)m_cellSize - 1, (int)m_cellSize - 1, cellColour);
+				DrawRectangle(static_cast<int>(x * m_cellSize), static_cast<int>(y * m_cellSize),
+					static_cast<int>(m_cellSize) - 1, static_cast<int>(m_cellSize) - 1, cellColour);
 
 			}
 			else {
 				for (int i = 0; i < node->connections.size(); i++) {
 					Node* other = node->connections[i].target;
 					DrawLine((x + 0.5) * m_cellSize, (y + 0.5) * m_cellSize,
-						(int)other->position.x, (int)other->position.y, BLACK);
+						static_cast<int>(other->position.x), static_cast<int>(other->position.y), BLACK);
 				}
 			}
 		}
@@ -85,7 +85,7 @@ void NodeMap::initialise(std::vector<std::string>& asciiMap, int cellSize) {
 			char tile = x < line.size() ? line[x] : emptySquare;
 			
 			m_nodes[x + m_width * y] = tile == emptySquare ? nullptr :
-				new Node(((float)x + 0.5f) * m_cellSize, ((float)y + 0.5f) * m_cellSize);
+				new Node((static_cast<float>(x) + 0.5f) * m_cellSize, (static_cast<float>(y) + 0.5f) * m_cellSize);
 
 		}
 	}

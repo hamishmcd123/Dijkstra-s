@@ -13,5 +13,4 @@ public:
 	void draw();
 	void setNode(Node* node);
 	void setSpeed(int speed);
-
 };
