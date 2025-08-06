@@ -2,9 +2,10 @@
 #include "pathfinding.hpp"
 #include "nodemap.hpp"
 #include "raylib.hpp"
+#include "pathagent.hpp"
 
 int main() {
-    int cellSize = 80;
+    int cellSize = 64;
 
     std::vector<std::string> asciiMap;
     asciiMap.push_back("000000000000");
@@ -19,28 +20,45 @@ int main() {
     NodeMap map;
     map.initialise(asciiMap, cellSize);
     
-    Node* start = nullptr;
+    Node* start = map.getNode(1,1);
     Node* end = nullptr;
+
+
+    PathAgent agent;
+    agent.setNode(start);
+    agent.setSpeed(64);
 
     std::vector<Node*> path = NodeMap::DijkstrasSearch(start, end);
 
     InitWindow(cellSize * map.m_width, cellSize * map.m_height, "NodeGraph");
-   
+
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
         map.draw();
-        NodeMap::drawPath(path);
+        NodeMap::drawPath(agent.m_path);
+
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
             Vector2 mousePos = GetMousePosition();
             start = map.getClosestNode(glm::vec2(mousePos.x, mousePos.y));
             path = NodeMap::DijkstrasSearch(start, end);
-        }
+            if (start != nullptr) {
+				agent.setNode(start);
+				agent.goToNode(end);
+            }
+	   }
+
         else if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)) {
             Vector2 mousePos = GetMousePosition();
             end = map.getClosestNode(glm::vec2(mousePos.x, mousePos.y));
+            start = map.getClosestNode(agent.m_position);
             path = NodeMap::DijkstrasSearch(start, end);
+            agent.setNode(start);
+            agent.goToNode(end);
         }
+
+        agent.update(GetFrameTime());
+        agent.draw();
         EndDrawing();
     }
 

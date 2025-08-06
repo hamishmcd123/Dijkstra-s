@@ -8,7 +8,6 @@ public:
 	int m_width; 
 	int m_height;
 	float m_cellSize;
-	
 	Node** m_nodes;
 	Node* getNode(int x, int y);
 	void draw();
@@ -17,5 +16,4 @@ public:
 	Node* getClosestNode(glm::vec2 worldPos);
 	void initialise(std::vector<std::string>& asciiMap, int cellSize);
 	static std::vector<Node*> DijkstrasSearch(Node* startNode, Node* endNode);
-
 };

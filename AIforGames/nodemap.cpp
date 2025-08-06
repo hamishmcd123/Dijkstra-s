@@ -180,7 +180,7 @@ std::vector<Node*> NodeMap::DijkstrasSearch(Node* startNode, Node* endNode)
 	Node* currentNode = endNode;
 
 	if (endNode->previous == nullptr) {
-		return {}; // No path found
+		return {};
 	}
 
 	while (currentNode != nullptr) {

@@ -1,8 +1,37 @@
 #include "pathagent.hpp"
 #include "nodemap.hpp"
+#include "raylib.h"
 
 void PathAgent::update(float dtime)
 {
+	if (m_path.empty()) {
+		return;
+	}
+	
+	Node* nextNode = m_path[m_currentIndex];
+
+	glm::vec2 vecToTarget = nextNode->position - m_position;
+
+	float distanceToTarget = glm::length(vecToTarget);
+
+	float toMove = distanceToTarget - m_speed * dtime;
+
+	if (toMove > 0) {
+		m_position += m_speed * dtime * glm::normalize(vecToTarget);
+	}
+	else {
+		if (++m_currentIndex >= m_path.size()) {
+			m_position = nextNode->position;
+			m_path.clear();
+			m_currentIndex = 0;
+			setNode(nextNode);
+		}
+		else {
+			nextNode = m_path[m_currentIndex];
+			vecToTarget = nextNode->position - m_position;
+			m_position += -1 * toMove * glm::normalize(vecToTarget);
+		}
+	}
 }
 
 void PathAgent::goToNode(Node* node)
@@ -13,4 +42,17 @@ void PathAgent::goToNode(Node* node)
 
 void PathAgent::draw()
 {
+	DrawCircle((int)m_position.x, (int)m_position.y, 16, { 255,255,0,255 });
+
+}
+
+void PathAgent::setNode(Node* node)
+{
+	m_currentNode = node;
+	m_position = node->position;
+}
+
+void PathAgent::setSpeed(int speed)
+{
+	m_speed = speed;
 }
