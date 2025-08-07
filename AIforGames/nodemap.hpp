@@ -16,5 +16,6 @@ public:
 	Node* getClosestNode(glm::vec2 worldPos);
 	void initialise(std::vector<std::string>& asciiMap, int cellSize);
 	void resetNodes();
+	void drawStartEndNodes(Node* startNode, Node* endNode);
 	static std::vector<Node*> DijkstrasSearch(Node* startNode, Node* endNode);
 };

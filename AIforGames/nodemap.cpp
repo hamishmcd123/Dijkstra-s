@@ -13,14 +13,14 @@ Node* NodeMap::getNode(int x, int y)
 void NodeMap::draw()
 {
 	// Draw a solid rectangle where there ISN'T a node.
-	Color cellColour{ 200, 0, 0, 255 };
+	Color cellColour{ 105, 105, 105, 255 };
 
 	for (int y = 0; y < m_height; y++) {
 		for (int x = 0; x < m_width; x++) {
 			Node* node = getNode(x, y);
 			if (node == nullptr) {
 				DrawRectangle(static_cast<int>(x * m_cellSize), static_cast<int>(y * m_cellSize),
-					static_cast<int>(m_cellSize) - 1, static_cast<int>(m_cellSize) - 1, cellColour);
+					static_cast<int>(m_cellSize), static_cast<int>(m_cellSize), cellColour);
 
 			}
 			else {
@@ -127,6 +127,14 @@ void NodeMap::resetNodes()
 		}
 	}
 }
+
+void NodeMap::drawStartEndNodes(Node* startNode, Node* endNode) {
+	if (startNode && endNode) {
+		DrawCircleLines(startNode->position.x, startNode->position.y, 8.0f, RED);
+		DrawCircleLines(endNode->position.x, endNode->position.y, 8.0f, LIME);
+	}
+}
+
 
 std::vector<Node*> NodeMap::DijkstrasSearch(Node* startNode, Node* endNode)
 {

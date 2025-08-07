@@ -40,8 +40,9 @@ int main() {
     PathAgent agent;
     agent.setNode(start);
     agent.m_position = start->position;
-    agent.setSpeed(1024);
-    agent.setRadius(8);
+    agent.setSpeed(256);
+    agent.setRadius(10);
+   
 
     std::vector<Node*> path = NodeMap::DijkstrasSearch(start, end);
 
@@ -49,7 +50,7 @@ int main() {
 
     while (!WindowShouldClose()) {
         BeginDrawing();
-        ClearBackground(RAYWHITE);
+        ClearBackground(BLACK);
         map.draw();
         NodeMap::drawPath(agent.m_path);
 
@@ -69,9 +70,10 @@ int main() {
             map.resetNodes();
             Vector2 mousePos = GetMousePosition();
             end = map.getClosestNode(glm::vec2(mousePos.x, mousePos.y));
+            start = agent.m_currentNode;
             agent.goToNode(end);
         }
-
+        map.drawStartEndNodes(start, end);
         agent.update(GetFrameTime());
         agent.draw();
         EndDrawing();
