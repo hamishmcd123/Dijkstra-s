@@ -37,8 +37,8 @@ void NodeMap::draw()
 void NodeMap::drawPath(std::vector<Node*> path)
 {
 	for (int i = 1; i < path.size(); i++) {
-		DrawLine(path[i - 1]->position.x, path[i - 1]->position.y, path[i]->position.x,
-			path[i]->position.y, LIME);
+		DrawLine((int)(path[i - 1]->position.x), (int)(path[i - 1]->position.y), (int)(path[i]->position.x),
+			(int)(path[i]->position.y), LIME);
 	}
 }
 
@@ -67,10 +67,10 @@ Node* NodeMap::getClosestNode(glm::vec2 worldPos)
 void NodeMap::initialise(std::vector<std::string>& asciiMap, int cellSize) {
 	m_cellSize = cellSize;
 	const char emptySquare = '0';
-	m_height = asciiMap.size();
+	m_height = (int)asciiMap.size();
 
 	// We are assuming all strings are the same length, so we set the width to the size of the first string.
-	m_width = asciiMap[0].size();
+	m_width = (int)asciiMap[0].size();
 
 	m_nodes = new Node*[m_width * m_height];
 
@@ -122,7 +122,7 @@ void NodeMap::resetNodes()
 			Node* toReset = getNode(x, y);
 			if (toReset) {
 				toReset->previous = nullptr;
-				toReset->gScore = INT_MAX;
+				toReset->gScore = FLT_MAX;
 			}
 		}
 	}
@@ -130,8 +130,8 @@ void NodeMap::resetNodes()
 
 void NodeMap::drawStartEndNodes(Node* startNode, Node* endNode) {
 	if (startNode && endNode) {
-		DrawCircleLines(startNode->position.x, startNode->position.y, 8.0f, RED);
-		DrawCircleLines(endNode->position.x, endNode->position.y, 8.0f, LIME);
+		DrawCircleLines((int)startNode->position.x, (int)startNode->position.y, 8.0f, RED);
+		DrawCircleLines((int)endNode->position.x, (int)endNode->position.y, 8.0f, LIME);
 	}
 }
 
@@ -178,7 +178,7 @@ std::vector<Node*> NodeMap::DijkstrasSearch(Node* startNode, Node* endNode)
 
 		for (auto& c : currentNode->connections) {
 			if (closedList.find(c.target) == closedList.end()) {
-				int gScore = c.cost + currentNode->gScore;
+				float gScore = c.cost + currentNode->gScore;
 
 			// If the target is not in the open list.
 				if (openSet.find(c.target) == openSet.end()) {

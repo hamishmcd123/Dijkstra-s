@@ -13,7 +13,7 @@ struct Edge {
 struct Node {
 	glm::vec2 position;
 	std::vector<Edge> connections;
-	Node(float xpos, float ypos) : position(glm::vec2(xpos, ypos)) { previous = nullptr; gScore = INT_MAX; }
+	Node(float xpos, float ypos) : position(glm::vec2(xpos, ypos)) { previous = nullptr; gScore = FLT_MAX; }
 	float gScore;
 	Node* previous;
 	void connectTo(Node* other, float cost);

@@ -7,7 +7,7 @@ class NodeMap{
 public:
 	int m_width; 
 	int m_height;
-	float m_cellSize;
+	int m_cellSize;
 	Node** m_nodes;
 	Node* getNode(int x, int y);
 	void draw();

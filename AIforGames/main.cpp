@@ -27,8 +27,6 @@ int main() {
     asciiMap.push_back("011000000000000000000000000110");
     asciiMap.push_back("011111111111111111111111111110");
     asciiMap.push_back("000000000000000000000000000000");
-
-
     
     NodeMap map;
     map.initialise(asciiMap, cellSize);
@@ -36,13 +34,11 @@ int main() {
     Node* start = map.getNode(2,2);
     Node* end = nullptr;
 
-
     PathAgent agent;
     agent.setNode(start);
     agent.m_position = start->position;
     agent.setSpeed(256);
     agent.setRadius(10);
-   
 
     std::vector<Node*> path = NodeMap::DijkstrasSearch(start, end);
 

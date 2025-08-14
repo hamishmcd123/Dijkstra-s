@@ -52,12 +52,12 @@ void PathAgent::setNode(Node* node)
 	m_currentNode = node;
 }
 
-void PathAgent::setSpeed(int speed)
+void PathAgent::setSpeed(float speed)
 {
 	m_speed = speed;
 }
 
-void PathAgent::setRadius(int radius)
+void PathAgent::setRadius(float radius)
 {
 	m_radius = radius;
 }

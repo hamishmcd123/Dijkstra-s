@@ -8,11 +8,11 @@ public:
 	int m_currentIndex;
 	std::vector<Node*> m_path;
 	glm::vec2 m_position;
-	int m_radius;
+	float m_radius;
 	void update(float dtime);
 	void goToNode(Node* node);
 	void draw();
 	void setNode(Node* node);
-	void setSpeed(int speed);
-	void setRadius(int radius);
+	void setSpeed(float speed);
+	void setRadius(float radius);
 };
